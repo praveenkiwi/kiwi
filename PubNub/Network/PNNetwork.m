@@ -238,6 +238,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) dispatch_queue_t processingQueue;
 
 /**
+ @brief      Stores reference on queue which is used to call \b PNNetwork response parsing on another 
+             queue.
+ @discussion Response processing involves data parsing which is most time consuming operation. Dispatching 
+             response processing on side queue allow to keep requests sending unaffected by processing delays.
+ 
+ */
+@property (nonatomic, strong) dispatch_queue_t parsingQueue;
+
+/**
  @brief  Stores reference on spin-lock which is used to protect access to session instance which can be 
          changed at any moment (invalidated instances can't be used and SDK should instantiate new instance).
  
