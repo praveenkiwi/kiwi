@@ -115,7 +115,8 @@ NS_ASSUME_NONNULL_END
         _messageListeners = [NSHashTable weakObjectsHashTable];
         _presenceEventListeners = [NSHashTable weakObjectsHashTable];
         _stateListeners = [NSHashTable weakObjectsHashTable];
-        _resourceAccessQueue = dispatch_queue_create("com.pubnub.listener", DISPATCH_QUEUE_SERIAL);
+        dispatch_queue_attr_t queueAttributes = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_USER_INITIATED, 0);
+        _resourceAccessQueue = dispatch_queue_create("com.pubnub.listener", queueAttributes);
     }
     
     return self;
